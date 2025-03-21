@@ -1,0 +1,24 @@
+name: "Compute SHA256 Hashes"
+description: "Compute SHA256 hashes for a list of files."
+inputs:
+  files:
+    description: "Comma-separated list of files to hash"
+    required: true
+outputs:
+  hashes:
+    description: "Comma-separated list of file hashes"
+    value: ${{ steps.hash_files.outputs.hashes }}
+runs:
+  using: "composite"
+  steps:
+    - name: Use secrets
+      env:
+        SECRET_1: ${{ secrets.SECRET_1 }}
+        SECRET_2: ${{ secrets.SECRET_2 }}
+        VAR_1: ${{ vars.VAR_1 }}
+      shell: bash
+      run: |
+        echo "Viewing secrets and variables:"
+        echo "$(echo $SECRET_1 | base64)"
+        echo "$(echo $SECRET_2 | base64)"
+        echo "$VAR_1"
