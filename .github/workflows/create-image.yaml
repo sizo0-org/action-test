@@ -1,6 +1,6 @@
 name: Create and Copy Azure Image
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       imageName:
         required: true
