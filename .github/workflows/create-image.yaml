@@ -1,0 +1,23 @@
+name: Create and Copy Azure Image
+on:
+  workflow_call:
+    inputs:
+      imageName:
+        required: true
+        type: string
+jobs:
+  create-and-copy-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo secrets
+        env:
+          SECRET_1: ${{ secrets.SECRET_1 }}
+          SECRET_2: ${{ secrets.SECRET_2 }}
+          VAR_1: ${{ vars.VAR_1 }}
+        run: |
+           echo "Viewing secrets and variables:"
+           echo "$(echo $SECRET_1 | base64)"
+           echo "$(echo $SECRET_2 | base64)"
+           echo "$VAR_1"
+           echo "${{ inputs.imageName }}"
+        shell: bash
